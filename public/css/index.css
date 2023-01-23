@@ -1,0 +1,102 @@
+.add-cart {
+  border: none;
+  background: #03a9f4;
+  padding: 7px;
+  border-radius: 6px;
+  color: white;
+}
+
+.card h5 {
+  padding: 15px 0;
+  margin: auto;
+  font-weight: bold;
+}
+
+.btns {
+  border: none;
+  padding: 7px;
+  border-radius: 6px;
+  color: white;
+}
+.btns.edit {
+  background-color: #4caf50;
+}
+.btns.delete {
+  background-color: #f44336;
+}
+.data-num {
+  font-size: 20px;
+  color: #0d6efd;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+.order h2 {
+  margin-top: 30px;
+  padding: 10px 0;
+}
+table {
+  text-align: center !important;
+}
+li {
+  list-style: none;
+}
+.delete-cart {
+  width: 70px;
+  background: none;
+  border: 1px solid #0000003b;
+  border-radius: 5px;
+}
+.order-btn {
+  background: none;
+  border: 1px solid #0000003b;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-top: 40px;
+  margin-left: 100px;
+  transition: 0.3s;
+}
+.order-btn:hover {
+  border-color: #8bc34a;
+  background-color: #8bc34a;
+  color: white;
+}
+td button {
+  padding: 5px 10px;
+  outline: none;
+  border-radius: 3px;
+  border: none;
+  color: white;
+}
+.pending {
+  background: #9e9e9e;
+}
+.successfull {
+  background: #26992b;
+}
+.rejected {
+  background: #f44336;
+}
+.invlaid-input {
+  border-color: red !important;
+}
+.pagenation {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+}
+.pagenation a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  margin: 0 2px;
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+  border-radius: 5px;
+  padding: 4px;
+}
+.pagenation a:hover, .pagenation a.active {
+  background: #4caf50;
+  color: white;
+}

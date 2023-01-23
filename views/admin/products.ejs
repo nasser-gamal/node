@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <%- include("../../partials/head.ejs") %>
+  <link rel="stylesheet" href="../css/index.css">
+  <body>
+    <%- include("../../partials/nav.ejs") %>
+    <%- include("../../partials/card.ejs") %>
+    <% if (data.length > 0) { %>
+      <div class="container mt-5 pb-5">
+        <span class="d-block delete-msg"></span>
+        <div class="data-num">You Have <%= totalItems %> Products</div>
+        <div class="row gap-3">
+        <% data.forEach(item => {%> 
+           <div class="col-3">
+          <div class="card" >
+            <img style=" height: 200px; object-fit: cover; " src=/<%= item.image %> class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title"><%= item.title %></h5>
+              <div>
+                <span class="my-1 fw-bold">Author : </span> <span><%= item.userId.userName %></span>
+              </div>
+              <span class="my-1 fw-bold">Price : </span> <span><%= item.price %></span>
+              <p class="card-text">
+                <%= item.description %>
+              </p>
+                <input type="hidden" name="id" class="id" value="<%= item._id %>">
+                <input type="hidden" name="_csrf" class="token" value="<%= csrfToken %>" />
+                  <button type="button" onclick="deleteProduct();" class="btns delete">Delete</button>
+              <a href="/admin/edit-product/<%= item._id %>?edit=true" class="text-center">
+                <button class="btns edit">Edit</button>
+              </a>
+            </div>
+          </div>
+        </div>
+        <%  }) %> 
+      </div>
+      <%- include("../../partials/pagenation.ejs", {link: "/admin/products"}) %> 
+    </div>
+    <%  }  else { %>
+      <div class="container">
+        <h2 style=" margin-top: 40px; font-weight: bold; ">No Data</h2>
+      </div>    
+      <%  } %> 
+      <script src="../js/admin.js"></script>
+  </body>
+</html>

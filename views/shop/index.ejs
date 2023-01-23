@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <%- include("../../partials/head.ejs") %>
+  <link rel="stylesheet" href="css/index.css">
+  <body>
+    <%- include("../../partials/nav.ejs") %>
+    <!-- <div class="container ">
+      <div class="card-one"></div>
+      </div>
+    </div> -->
+    <% if (data.length > 0) { %>
+    <div class="container mt-5 pb-5">
+      <div class="row gap-3">
+        <% data.forEach(item => {%> 
+           <div class="col-3 " id="<%= item._id.toString() %>">
+          <div class="card" >
+            <h5 class="card-title"><%= item.title %></h5>
+            <img style=" height: 200px; object-fit: cover; " src="/<%= item.image %>" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <div>
+                <span class="my-1 fw-bold">Author : </span> <span><%= item.userId.userName %></span>
+              </div>
+              <span class="my-1 fw-bold">Price : </span> <span><%= item.price %></span>
+              <p class="card-text">
+                <%= item.description %>
+              </p>
+              <a href="/product/<%= item._id %>" class="text-center">
+                <button class="add-cart">Details</button>
+              </a>
+              <% if (isAuthenticate) { %> 
+                <form action="/cart/add" method="post">
+                    <input type="hidden" value="<%= item._id %>" name="id">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                    <button class="add-cart">Add To Cart</button>
+                </form>
+              <% } %> 
+            </div>
+          </div>
+        </div>
+        <%  }) %> 
+       
+      </div>
+    <%- include("../../partials/pagenation.ejs", {link: '/'}) %> 
+    </div>
+    <%  }  else { %>
+      <div class="container">
+        <h2 style=" margin-top: 40px; font-weight: bold; ">No Data</h2>
+      </div>
+    <%  } %> 
+    <!-- <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io('http://localhost:8000')
+      socket.on("connection")
+
+      socket.on('product', ({product, userName}) => {
+        const data = 
+        `  <div class="col-3">
+        <div class="card" >
+          <h5 class="card-title"> ${product.title} </h5>
+          <img style=" height: 200px; object-fit: cover; " src="/${product.image} " class="card-img-top" alt="..." />
+          <div class="card-body">
+            <div>
+              <span class="my-1 fw-bold">Author : </span> <span> ${userName} </span>
+            </div>
+            <span class="my-1 fw-bold">Price : </span> <span> ${product.price} </span>
+            <p class="card-text">
+               ${product.description} 
+            </p>
+            <a href="/product/${product._id}" class="text-center">
+              <button class="add-cart">Details</button>
+            </a>
+            <% if (isAuthenticate)   {  %>
+              <form action="/cart/add" method="post">
+                  <input type="hidden" value="${product._id}" name="id">
+                  <input type="hidden" name="_csrf" value={csrfToken} />
+                  <button class="add-cart">Add To Cart</button>
+              </form>
+            <% }  %> 
+          </div>
+        </div>
+      </div>`
+        document.querySelector('.card-one').innerHTML = data
+      })
+
+
+      socket.on('delete', (id) => {
+        document.getElementById(id).remove()
+        console.log(document.getElementById(id))
+        console.log(id)
+      }) 
+
+
+
+    </script> -->
+  </body>
+</html>

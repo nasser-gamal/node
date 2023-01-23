@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <%- include("../../partials/head.ejs") %>
+  <body>
+    <%- include("../../partials/nav.ejs") %>
+    <form  method="post" action="<% if (edit) { %> /admin/edit-product/<%= product._id  %>  <% } else { %>  /add-products  <%} %>"  class="m-auto mt-5" style="width: 300px ; " enctype="multipart/form-data">
+      <div>
+        <span class="fw-bold" style="color: red;"><%= errorMessage %> </span>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">name </label>
+        <input type="text" 
+        class="<%= validationErrors.find(err =>
+        err.param === "title") ? "form-control invlaid-input" : "form-control"
+        %>"
+        name="title" value=<% if (edit || hasError)  { %> <%= product.title  %> <% } %> >
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">price</label>
+        <input type="text" name="price" 
+        class="<%= validationErrors.find(err =>
+        err.param === "price") ? "form-control invlaid-input" : "form-control"
+        %>"
+        id="exampleInputPassword1" value=<% if (edit || hasError)  { %> <%= product.price  %> <% } %> >
+      </div>
+      <div class="mb-3">
+        <label for="image" class="image">image</label>
+        <input type="file" name="image" id="image"  >
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">description</label>
+        <input type="text" name="description" 
+        class="<%= validationErrors.find(err =>
+        err.param === "description") ? "form-control invlaid-input" : "form-control" %>"
+        id="exampleInputPassword1"  value=<% if (edit || hasError){ %> <%= product.description %><% }%> >
+      </div>
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+      <% if (edit) { %> 
+      <input type="hidden" name="id" value="<%= product._id  %>">
+
+        <% } %> 
+      <div class="text-center">
+      <button type="submit " class="btn btn-primary"><% if (edit) { %>  Update Product <% } else { %> Add Product <%} %> </button>
+
+      </div>
+
+    </form>
+  </body>
+</html>

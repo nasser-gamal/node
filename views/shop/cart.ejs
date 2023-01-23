@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../../partials/head.ejs") %>
+  <body>
+    <%- include("../../partials/nav.ejs") %>
+    <link rel="stylesheet" href="../css/index.css" />
+    <main class="container pb-5">
+      <% if (data.length > 0 ) { %>
+      <div class="order-num py-3">
+        <h2>Cart</h2>
+        <p class="fw-bold">
+          You Have (<span style="color: rgb(23, 207, 207)"
+            ><%= data.length %></span
+          >) Items in Your Cart
+        </p>
+      </div>
+      <% data.forEach(item => { %>
+
+      <ul style="margin-top: 40px mt-5 mb-3">
+        <li class="fw-bold d-flex align-items-center gap-5">
+          <img style="width: 120px; height: 120px; border-radius: 50%" src=/<%=
+          item.productId.image %> alt="" />
+          <h5><%= item.productId.title %> (<%= item.quantity %>)</h5>
+          <form action="/shop/cart-delete" method="post">
+            <input type="hidden" name="id" value="<%= item._id %>" />
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <button class="delete-cart">حذف</button>
+          </form>
+        </li>
+      </ul>
+      <% }) %>
+      <!-- <form action="/shop/add-order" method="post">
+        <input type="hidden" name="id" />
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <button class="order-btn">Order Now</button>
+      </form> -->
+      <a href="/checkout" class="order-btn">Order Now</a>
+    </main>
+
+    <% } else { %>
+    <div class="container">
+      <h2 style="margin-top: 40px; font-weight: bold">Cart Is Empty</h2>
+    </div>
+    <% } %>
+  </body>
+</html>

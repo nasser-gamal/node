@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../../partials/head.ejs") %>
+  <link rel="stylesheet" href="../css/index.css" />
+  <body>
+    <%- include("../../partials/nav.ejs") %> <% if (data) { %>
+    <div class="container mt-5 pb-5">
+      <div class="row gap-3">
+        <div class="col-3">
+          <div class="card">
+            <h5 class="card-title"><%= data.name %></h5>
+            <img style="height: 150px" src="/<%= data.image %>" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <span class="my-1 fw-bold">Price : </span>
+              <span><%= data.price %></span>
+              <p class="card-text"><%= data.description %></p>
+              <% if (isAuthenticate) { %>
+              <form action="/cart/add" method="post">
+                <input type="hidden" value="<%= data.id %>" name="id" />
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+                <button class="add-cart">Add To Cart</button>
+              </form>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </body>
+</html>

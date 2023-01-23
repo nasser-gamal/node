@@ -1,0 +1,18 @@
+<% if (hasPagenation) { %>
+  <div class="pagenation">
+    <% if (currentPage !== 1 && previousPage !== 1) { %>
+    <a href="<%= link  %>?page=1">1</a>
+    <% } %> <% if (hasPreviousPage) { %>
+    <a href="<%= link  %>?page=<%= previousPage %>"><%= previousPage %> </a>
+    <% } %>
+    <a href="<%= link  %>?page=<%= currentPage %>" class="active"
+      ><%= currentPage %>
+    </a>
+    <% if (hasNextPage) { %>
+    <a href="<%= link  %>?page=<%= nextPage %>"><%= nextPage %> </a>
+    <% } %> <% if (lastPage !== nextPage && hasNextPage){ %>
+    <span>...</span>
+    <a href="<%= link  %>?page=<%= lastPage %> "><%= lastPage %> </a>
+    <% } %>
+  </div>
+<% } %>

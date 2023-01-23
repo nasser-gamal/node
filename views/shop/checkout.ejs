@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../../partials/head.ejs") %>
+  <body>
+    <%- include("../../partials/nav.ejs") %>
+    <link rel="stylesheet" href="../css/index.css" />
+    <main class="container pb-5 mt-4">
+      <% if (data.length > 0 ) { %> <% data.forEach(item => { %>
+      <ul style="margin-top: 40px mt-5 mb-3">
+        <li class="fw-bold d-flex align-items-center gap-5">
+          <img style="width: 120px; height: 120px; border-radius: 50%" src=/<%=
+          item.productId.image %> alt="" />
+          <h5><%= item.productId.title %> (<%= item.quantity %>)</h5>
+          <span> totalPrice : <%= totalPrice %> </span>
+        </li>
+      </ul>
+      <% }) %>
+      <!-- <form action="/shop/add-order" method="post">
+        <input type="hidden" name="id" />
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <button class="order-btn">Order Now</button>
+      </form> -->
+      <div>
+        <button id="order-btn">Order</button>
+        <script src="https://js.stripe.com/v3/"></script>
+        <script>
+          var stripe = Stripe(
+            "pk_test_51MShscBxBfRJQLlvvphjuPPJGuZFrLabqz5JlO3pgKUGFpE7aCF9TPjHtHZPrY8v9UWKzhWjU8Xbj9PgK9SmKPbw00NPt6oiUN"
+          );
+          var orderBtn = document.querySelector("#order-btn");
+
+          orderBtn.addEventListener("click", () => {
+            stripe.redirectToCheckout({
+              sessionId: "<%= sessionId %>",
+            });
+          });
+        </script>
+      </div>
+    </main>
+    <% } else { %>
+    <div class="container">
+      <h2 style="margin-top: 40px; font-weight: bold">Cart Is Empty</h2>
+    </div>
+    <% } %>
+  </body>
+</html>
