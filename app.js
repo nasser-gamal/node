@@ -31,7 +31,7 @@ const PORT = process.env.PORT || 8000;
 // const certificate = fs.readFileSync("server.cert");
 
 const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.vhixoru.mongodb.net/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`;
-
+console.log(uri);
 const store = new MongoSession({
   uri,
   collection: "sessions",
@@ -56,10 +56,10 @@ const fileFilter = (req, file, cb) => {
 
 const scrfProtection = csrf();
 
-const accessLogStream = fs.createWriteStream(
-  path.join(__dirname, "access.log"),
-  { flags: "a" }
-);
+// const accessLogStream = fs.createWriteStream(
+//   path.join(__dirname, "access.log"),
+//   { flags: "a" }
+// );
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
@@ -68,7 +68,7 @@ app.use(express.static("public"));
 app.use("/uploads", express.static("uploads"));
 app.use(helmet());
 // app.use(compression());
-app.use(morgan("combined", { stream: accessLogStream }));
+// app.use(morgan("combined", { stream: accessLogStream }));
 
 app.use(
   session({
