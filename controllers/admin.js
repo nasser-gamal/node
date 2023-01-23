@@ -6,7 +6,6 @@ const { default: mongoose } = require("mongoose");
 const deleteFile = require("../utils/fileHelper");
 // const io = require("../socket");
 
-
 const addProductsForm = (req, res) => {
   res.render("admin/addProducts", {
     pageTitle: "addProducts ",
@@ -83,7 +82,7 @@ const getProducts = (req, res) => {
 
 const addProducts = (req, res) => {
   const { title, price, description } = req.body;
-  const userId = req.session.user._id;
+  const userId = req.user._id;
   const image = req.file;
   if (!image) {
     return res.render("admin/addProducts", {
@@ -127,12 +126,12 @@ const addProducts = (req, res) => {
   });
   product
     .save()
-    .then((result) => {
-      io.getIO().emit("product", {
-        product,
-        userName: req.user.userName,
-      });
-    })
+    // .then((result) => {
+    //   io.getIO().emit("product", {
+    //     product,
+    //     userName: req.user.userName,
+    //   });
+    // })
     .then((result) => res.redirect("/"))
     .catch((err) => res.redirect("/500"));
 };
