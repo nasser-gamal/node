@@ -4,7 +4,9 @@ const fs = require("fs");
 const { validationResult } = require("express-validator");
 const { default: mongoose } = require("mongoose");
 const deleteFile = require("../utils/fileHelper");
-const io = require("../socket");
+// const io = require("../socket");
+
+
 const addProductsForm = (req, res) => {
   res.render("admin/addProducts", {
     pageTitle: "addProducts ",

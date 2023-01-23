@@ -1,7 +1,6 @@
 const express = require("express");
 // const { mongoConnect } = require("./utils/database");
 const app = express();
-const PORT = 8000;
 require("dotenv").config();
 const https = require("https");
 
@@ -25,6 +24,8 @@ const orderRouters = require("./routes/order");
 const User = require("./models/user");
 
 const { getError404, getError500 } = require("./controllers/error");
+
+const PORT = process.env.PORT || 8000;
 
 // const pricateKey = fs.readFileSync("server.key");
 // const certificate = fs.readFileSync("server.cert");
@@ -120,7 +121,7 @@ app.use(getError404);
 mongoose
   .connect(uri)
   .then((result) => {
-    app.listen(process.env.PORT || PORT);
+    app.listen(PORT);
 
     // const server = app.listen(process.env.PORT || PORT);
     // https
@@ -131,7 +132,7 @@ mongoose
     //     },
     //     app
     //   )
-      // .listen(process.env.PORT || PORT);
+    // .listen(process.env.PORT || PORT);
     // const io = require("./socket").init(server);
     // io.on("connection", (socket) => {
     //   console.log("a user connected");
