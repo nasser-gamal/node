@@ -10,14 +10,14 @@ router.post("/shop/add-order", authenticate, orderControllers.addOrders);
 
 router.get("/invoice/:orderId", authenticate, orderControllers.getInvoice);
 
-router.get("/checkout", authenticate, orderControllers.getCheckout);
+// router.get("/checkout", authenticate, orderControllers.getCheckout);
 
-router.post("/checkout/success", authenticate, orderControllers.addOrders);
+// router.post("/checkout/success", authenticate, orderControllers.addOrders);
 
-router.get("/checkout/success", authenticate, (req, res) => {
-    res.redirect("/shop/orders")
-});
+// router.get("/checkout/success", authenticate, (req, res) => {
+//     res.redirect("/shop/orders")
+// });
 
-router.get("/checkout/cancel", authenticate, orderControllers.getCheckout);
+// router.get("/checkout/cancel", authenticate, orderControllers.getCheckout);
 
 module.exports = router;
