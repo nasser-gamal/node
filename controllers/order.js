@@ -37,10 +37,10 @@ const addOrders = (req, res) => {
     .then((orders) => {
       Order.create({
         orders,
-        userId: req.session.user._id,
+        userId: req.user._id,
       });
       return User.findOneAndUpdate(
-        { _id: req.session.user._id },
+        { _id: req.user._id },
         { $set: { cart: [] } }
       );
     })
@@ -117,50 +117,50 @@ const getInvoice = (req, res) => {
     });
 };
 
-const getCheckout = (req, res) => {
-  const userId = req.session.user._id;
+// const getCheckout = (req, res) => {
+//   const userId = req.session.user._id;
 
-  let totalPrice = 0;
-  User.findById(userId)
-    .populate("cart.productId")
-    .then((user) => {
-      const products = user.cart;
-      products
-        .map((product) => {
-          return (totalPrice += product.productId.price * product.quantity);
-        })
+//   let totalPrice = 0;
+//   User.findById(userId)
+//     .populate("cart.productId")
+//     .then((user) => {
+//       const products = user.cart;
+//       products
+//         .map((product) => {
+//           return (totalPrice += product.productId.price * product.quantity);
+//         })
 
-        // return stripe.checkout.sessions
-        //   .create({
-        //     payment_method_types: ["card"],
-        //     line_items: products.map((product) => {
-        //       return {
-        //         price_data: {
-        //           currency: "usd",
-        //           unit_amount: product.productId.price * 100,
-        //           product_data: {
-        //             name: product.productId.title,
-        //             description: product.productId.description,
-        //           },
-        //         },
-        //         quantity: product.quantity,
-        //       };
-        //     }),
-        //     mode: "payment",
-        //     success_url: `${req.protocol}://${req.get("host")}/checkout/success`,
-        //     cancel_url: `${req.protocol}://${req.get("host")}/checkout/cancel`,
-        //   })
-        .then((session) => {
-          res.render("shop/checkout", {
-            pageTitle: "Cart ",
-            path: "/checkout",
-            data: products,
-            totalPrice,
-            sessionId: session.id,
-          });
-        });
-    });
-};
+//         // return stripe.checkout.sessions
+//         //   .create({
+//         //     payment_method_types: ["card"],
+//         //     line_items: products.map((product) => {
+//         //       return {
+//         //         price_data: {
+//         //           currency: "usd",
+//         //           unit_amount: product.productId.price * 100,
+//         //           product_data: {
+//         //             name: product.productId.title,
+//         //             description: product.productId.description,
+//         //           },
+//         //         },
+//         //         quantity: product.quantity,
+//         //       };
+//         //     }),
+//         //     mode: "payment",
+//         //     success_url: `${req.protocol}://${req.get("host")}/checkout/success`,
+//         //     cancel_url: `${req.protocol}://${req.get("host")}/checkout/cancel`,
+//         //   })
+//         .then((session) => {
+//           res.render("shop/checkout", {
+//             pageTitle: "Cart ",
+//             path: "/checkout",
+//             data: products,
+//             totalPrice,
+//             sessionId: session.id,
+//           });
+//         });
+//     });
+// };
 
 module.exports = {
   getOrders,
