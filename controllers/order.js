@@ -8,7 +8,7 @@ const { fontSize } = require("pdfkit");
 
 const getOrders = (req, res) => {
   const isAuthenticate = req.session.isAuthenticate;
-  const userId = req.session.user._id;
+  const userId = req.user._id;
   Order.find({ userId })
     .populate("userId", "userName -_id")
     .populate("orders.productId", "title price imgUrl description -_id")
