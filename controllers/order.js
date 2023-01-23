@@ -166,5 +166,5 @@ module.exports = {
   getOrders,
   addOrders,
   getInvoice,
-  getCheckout,
+  // getCheckout,
 };
