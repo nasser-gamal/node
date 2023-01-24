@@ -23,6 +23,8 @@ router.post(
     .isFloat()
     .withMessage("Price Invalid Accept only Numbers"),
   body("description").notEmpty().withMessage("description Is a Required Field"),
+  upload,
+
   authenticate,
   adminControllers.addProducts
 );
@@ -44,6 +46,8 @@ router.post(
     .isFloat()
     .withMessage("Price Invalid Accept only Numbers"),
   body("description").notEmpty().withMessage("description Is a Required Field"),
+
+  upload,
   authenticate,
   adminControllers.editProducts
 );
